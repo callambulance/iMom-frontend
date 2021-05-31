@@ -1,0 +1,751 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$custom-typography: mat-typography-config(
+  $font-family: 'Nunito'
+);
+
+@include mat-core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$front-angular-material-primary: mat-palette($mat-indigo);
+$front-angular-material-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$front-angular-material-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$front-angular-material-theme: mat-light-theme((
+  color: (
+    primary: $front-angular-material-primary,
+    accent: $front-angular-material-accent,
+    warn: $front-angular-material-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($front-angular-material-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+///////////////////////////////////////
+// CUSTOM SETTINGS INDEX //////////////
+//
+// 1. Global
+// 2. Login Page
+// 3. Sidenav
+// 4. Header
+// 5. Dashboard
+//    5.1 Welcome-Dash
+//    5.2 Calendar-Dash
+//    5.3 Notes-Dash
+//    5.4 Counters-Dash
+//        5.4.1 Contractions-Dash
+//        5.4.2 Kick-Dash
+// 6. Pages
+//    6.1 Calendar
+//    6.2 Food
+//    6.3 Blog
+//    6.4 Forum
+//
+///////////////////////////////////////
+
+// GLOBAL SETTINGS ////////////////////
+
+:root {
+  --clr-primary-blue: #3f51b5;
+  --clr-primary-pink: #ff4081;
+  --ff-primary: 'Nunito', sans-serif;
+  --ff-secondary: 'Reenie Beanie', cursive;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  font-size: 62.5%;
+}
+body, h1, h2, h3, p {
+  margin: 0;
+  font-family: var(--ff-primary);
+}
+
+.menu-icon {
+  font-size: 2rem;
+}
+.view-port {
+  height: 79.8vh;
+  width: 87.7vw;
+  margin: 1.5rem auto;
+}
+.chips-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.mat-drawer-content {
+  height: unset!important;
+}
+
+@mixin FlexJusCont($direction, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+}
+@mixin OverFlowNoScrollBars() {
+  overflow: scroll;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// LOGIN PAGE /////////////////////////
+
+.login-card-container {
+  max-width: 800px;
+  margin: auto;
+  top: 20%;
+  display: inline-flex;
+
+  @media (max-width: 599px) {
+    top: 5%;
+    max-width: 400px;
+    font-size: .7rem;
+  }
+
+  .login-card-content {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+
+    @media (max-width: 599px) {
+      flex-direction: column;
+    }
+
+    .login-container {
+      @include FlexJusCont(column, space-between);
+      gap: 20px;
+
+      .login-input-container {
+        @include FlexJusCont(column, space-between);
+        gap: 20px;
+      }
+    }
+
+    .welcome-message {
+      @include FlexJusCont(column, space-between);
+      gap: 20px;
+
+      img {
+        transform: scale(.7);
+      }
+
+      h3 {
+        font-size: 24px;
+        width: 20ch;
+        text-align: -webkit-center;
+      }
+    }
+  }
+
+  h4 {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 2rem;
+    color: #fa3346;
+    font-weight: 600;
+
+    @media (max-width: 599px) {
+      font-size: 1.7rem;
+    }
+  }
+
+}
+
+// SIDENAV ////////////////////////////
+
+.sidenav {
+  img {
+    height: 5rem;
+    margin: .7rem 2.2rem;
+  }
+
+  .logout-button {
+    bottom: 20px;
+    left: 20px;
+    position: absolute!important;
+  }
+}
+
+.mat-sidenav-content {
+  overflow: hidden;
+
+  @media (max-width: 60rem) {
+      overflow: scroll;
+  }
+}
+
+
+// HEADER /////////////////////////////
+
+.header-container {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  margin: 1rem 1.5rem;
+
+  .search-bar-container {
+    width: 66.5%;
+
+    .search-input {
+      width: 100%;
+    }
+  }
+
+  .user-settings-container {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 2rem;
+    justify-content: center;
+
+    mat-card-content {
+      margin: 0;
+      height: auto;
+    }
+
+    .user-settings-button {
+      gap: 1rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// DASHBOARD //////////////////////////
+
+.grid-container {
+  margin: 1rem!important;
+}
+.dashboard-card {
+  top: .5rem!important;
+  left: .5rem!important;
+  right: .5rem!important;
+  bottom: .5rem!important;
+}
+.mat-card-content {
+  margin-bottom: 0;
+  overflow: scroll;
+  height: 5rem;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.mat-form-field-wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+.welcome-dash-container {
+  @include FlexJusCont(row, space-between);
+  height: 100%;
+  width: 100%;
+  background-image: url("/assets/welcome_background.jpg");
+  background-size: 25rem;
+  background-repeat: no-repeat;
+  background-position: 60rem;
+
+  .welcome-dash-message {
+    height: 100%;
+    width: 45%;
+    line-height: initial;
+    padding-right: 2rem;
+    font-weight: bold;
+    @include FlexJusCont(column, space-around);
+    align-items: flex-start;
+
+    h1 {
+      font: 900 4rem Nunito;
+    }
+
+    p {
+      font-size: 2.2rem;
+    }
+  }
+
+  .date-weather-container {
+    @include FlexJusCont(column, flex-end);
+    width: 22%;
+    padding-bottom: 1.2rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+.calendar-dash-container {
+  @include FlexJusCont(column, space-between);
+  height: 100%;
+
+  .calendar-dash-date {
+    height: 30%;
+  }
+
+  .calendar-dash-tasks-container {
+    @include FlexJusCont(column, space-between);
+    height: 100%;
+    padding-top: 1rem;
+  }
+
+  .tasks {
+    @include FlexJusCont(column, flex-start);
+    height: 85%;
+    @include OverFlowNoScrollBars();
+
+    .dash-task-hidden {
+      display: none;
+
+      div {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+
+    .dash-task-view {
+      margin: 1rem;
+
+      .task-title-container {
+        @include FlexJusCont(row, space-between);
+
+        .task-done {
+          color: springgreen;
+          cursor: pointer;
+        }
+
+        .task-todo {
+          color: #fa3346;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .calendar-dash-buttons {
+    @include FlexJusCont(row, space-between);
+  }
+}
+
+  // NEW TASK DIALOG
+  .new-task-form {
+    @include FlexJusCont(column, space-between);
+    gap: 1rem;
+  }
+
+.notes-dash-container {
+  height: 100%;
+  @include FlexJusCont(column, space-between);
+
+  .note-field {
+
+    .notes-input {
+      width: 100%;
+
+      textarea {
+        height: 15rem;
+      }
+    }
+  }
+
+  .notes-buttons {
+    @include FlexJusCont(row, space-between);
+  }
+}
+
+  // NOTES - DIALOG
+  .dialog-container {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-height: 700px;
+
+  h1 {
+    margin: 0;
+  }
+
+  .single-note {
+    margin-bottom: 10px;
+
+    p {
+      font-size: x-small;
+    }
+
+    button {
+      transform: scale(0.7);
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  h3 {
+    margin-bottom: 0;
+  }
+}
+
+  // COUNTERS
+    // CONTRACTIONS
+    .contractions-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50%;
+
+      button {
+        height: 10rem;
+        width: 10rem;
+        font-size: 3.5rem;
+        font-weight: bold;
+      }
+
+      .contractions-data {
+        font-size: x-large;
+
+        p {
+          margin: .5rem auto;
+        }
+      }
+    }
+    // KICKS
+    .kicks-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50%;
+
+      button {
+        height: 10rem;
+        width: 10rem;
+        font-size: 3.5rem;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-weight: bolder;
+        margin: auto 0;
+        font-size: 3.5rem;
+      }
+    }
+
+.forum-dash-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  p, h3, h5 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    cursor: pointer;
+  }
+
+  .topics-container {
+    height: 80%;
+
+    .forum-dash-my-topics {
+      height: 40%;
+
+    }
+
+    .forum-dash-topics {
+      height: 60%;
+      overflow: scroll;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+    .forum-dash-card-details {
+      display: inline-flex;
+      margin: 0 0 5px 0;
+      width: 100%;
+      align-items: center;
+      padding: .5rem;
+      justify-content: space-between;
+
+      .question-data-crumbs {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+      }
+    }
+  }
+.blog-dash-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .mat-card-content {
+    display: flex;
+    overflow: scroll;
+    overflow-wrap: anywhere;
+    margin: 0;
+  }
+
+  .mat-chip {
+    &:focus {
+      background-color: var(--clr-primary-pink)!important;
+    }
+
+    &:after {
+      background: none!important;
+    }
+  }
+
+  .blog-dash-articles {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    height: 100%;
+    margin: 1rem 0;
+    justify-content: space-between;
+    @include OverFlowNoScrollBars();
+  }
+
+  .blog-post-container {
+    margin: auto 1rem;
+    padding: 1rem;
+    width: 40rem;
+    height: 98%;
+
+    mat-card-footer {
+      font-size: x-small;
+      position: absolute;
+      bottom: 1.5rem;
+      right: 2rem;
+    }
+  }
+}
+.food-dash-container {
+  height: 100%;
+  @include FlexJusCont(column, space-between);
+
+  mat-chip {
+    background-color: #3f51b5 !important;
+    color: white !important;
+    font-size: x-small;
+
+    &:focus {
+      background-color: var(--clr-primary-pink)!important;
+    }
+
+    &:after {
+      background: none!important;
+    }
+  }
+
+  .meals-chips-container {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .all-meals {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    height: 100%;
+    margin: 1rem 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .meals-height {
+      height: 99%;
+    }
+
+    .meal-container {
+      margin: auto 1rem;
+      padding: 1rem;
+      width: 30rem;
+      height: 100%;
+    }
+  }
+}
+
+// PAGES //////////////////////////////
+
+//// CALENDAR /////////////////////////
+
+//// FOOD /////////////////////////////
+
+.food-chips-container {
+  @include FlexJusCont(row, center);
+  gap: 1rem;
+
+  mat-chip {
+    background-color: var(--clr-primary-blue) !important;
+    color: white !important;
+
+    &:focus {
+      background-color: var(--clr-primary-pink) !important;
+    }
+
+    &:after {
+      background: none !important;
+    }
+  }
+}
+
+.meals {
+  height: 94%;
+  margin-top: 1rem;
+  @include OverFlowNoScrollBars();
+
+  .meals-container {
+    @include FlexJusCont(column, center);
+
+    h2 {
+      margin: 1rem auto;
+    }
+  }
+
+  .day-container {
+    @include FlexJusCont(row, center);
+
+    mat-card {
+      margin: 0 1rem;
+    }
+  }
+}
+
+//// BLOG /////////////////////////////
+
+.blog-content-container {
+  height: 93%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+
+  .topic-of-the-day-container {
+    width: 30%;
+
+    .blog-post-container {
+      margin: 1rem;
+
+      .blog-post-footer {
+        @include FlexJusCont(row, space-between);
+
+        mat-card-footer {
+          margin: auto 0;
+        }
+      }
+    }
+  }
+
+  .other-articles-container {
+    width: 30%;
+    @include OverFlowNoScrollBars();
+
+    .others-container {
+      display: flex;
+      flex-direction: column;
+
+
+      .blog-post-container {
+        margin: 1rem;
+
+        .blog-post-footer {
+          @include FlexJusCont(row, space-between);
+
+          mat-card-footer {
+            margin: auto 0;
+          }
+        }
+      }
+    }
+  }
+
+  .things-to-do-container {
+    width: 20%;
+  }
+}
+
+//// FORUM ////////////////////////////
+
+.user-q-container {
+  height: 40%;
+  margin: 2rem 0;
+  cursor: row-resize;
+  @include FlexJusCont(row, space-between);
+  @include OverFlowNoScrollBars();
+
+  app-user-topics,
+  app-last-added {
+    width: 40%;
+  }
+}
+
+.searched-top {
+  height: 40%;
+  @include OverFlowNoScrollBars();
+  cursor: row-resize;
+}
+
+.question-card {
+  width: 400px;
+  margin-bottom: 1rem;
+
+  .last-content {
+    @include FlexJusCont(row, space-between);
+    align-items: center;
+
+    p {
+      margin: 0!important;
+    }
+  }
+}
+
+//// CALENDAR /////////////////////////
+
+.calendar-all-container {
+  @include FlexJusCont(row, space-between);
+
+  .calendar-container {
+    width: 60%;
+  }
+
+  .calendar-tasks-container {
+    width: 30%;
+  }
+}

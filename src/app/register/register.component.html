@@ -1,0 +1,72 @@
+<mat-card class="login-card-container">
+  <div class="login-card-content">
+    <div class="welcome-message">
+      <img src="assets/Logo.png">
+      <h3>Welcome to the best Mom app You can find</h3>
+      <ul>
+        <li>Pregnancy/Parenthood phase</li>
+        <li>Calendar to keep up with everything</li>
+        <li>Food receipts for every meal and day</li>
+        <li>Knowledge</li>
+        <li>Tips</li>
+        <li>Tasks to complete</li>
+        <li>Forum</li>
+      </ul>
+      <h4 style="font-family: 'Reenie Beanie', cursive;">iMom - One to rule them all</h4>
+    </div>
+    <div class="login-container">
+      <div class="login-input-container">
+  <div *ngIf="!isSuccessful">
+    <form  name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel"/>
+        <div class="alert-danger" *ngIf="username.errors && f.submitted">
+          <div *ngIf="username.errors.required">Username is required</div>
+          <div *ngIf="username.errors.minlength">Username must be at least 3 characters</div>
+          <div *ngIf="username.errors.maxlength">Username must be at most 20 characters</div>
+        </div>
+        </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3" maxlength="20" #name="ngModel"/>
+        <div class="alert-danger" *ngIf="name.errors && f.submitted">
+          <div *ngIf="name.errors.required">Name is required</div>
+          <div *ngIf="name.errors.minlength">Name must be at least 3 characters</div>
+          <div *ngIf="name.errors.maxlength">Name must be at most 20 characters</div>
+        </div>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel"/>
+        <div class="alert-danger" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">Email must be a valid email address</div>
+        </div>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel"/>
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </mat-form-field>
+      <br>
+        <button mat-raised-button color="primary">Sign Up</button>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">Signup failed!<br />{{ errorMessage }}</div>
+    </form>
+  </div>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+    Your registration is successful!
+        <button mat-raised-button color="primary" routerLink="/login">Log in</button>
+    </div>
+  </div>
+</div>
+  </div>
+</mat-card>

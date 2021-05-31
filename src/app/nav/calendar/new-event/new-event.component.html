@@ -1,0 +1,28 @@
+<form class="new-task-form"  (ngSubmit)="submitted()" #userForm="ngForm" [formGroup]="eventForm">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="New event title is..." value="" name="newEvent.eventName"  formControlName="eventName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput placeholder="I have to do..." value="" name="newEvent.eventText"  formControlName="eventText"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <textarea matInput placeholder="Where it will be..." value="" name="newEvent.eventText"  formControlName="eventLocation"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input matInput type="datetime-local" formControlName="eventStart">
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>End Date</mat-label>
+    <input matInput  type="datetime-local"formControlName="eventEnd">
+
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" mat-dialog-close [disabled]="!userForm.form.valid" >Save</button>
+</form>

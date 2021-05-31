@@ -1,0 +1,43 @@
+<mat-card class="view-port">
+
+  <div class="full-calendar-container">
+    <div class="calendar-container">
+
+<app-calendar-build [userEvent] = "userEvents"></app-calendar-build>
+<!--<button (click)="addEvent()">Add event</button>-->
+<!--        </ng-template>-->
+<!--      </ngx-simple-calendar>-->
+    </div>
+  <button mat-raised-button color="primary" (click)="addEvent()" style="position: absolute">Add event</button>
+  <div class="tasks-container">
+    <h3>Tasks</h3>
+    <div *ngIf="tasks.length > 0; else noTasks" class="tasks"
+         style="gap: 1rem;display: flex;flex-direction: column;">
+      <div *ngFor="let task of tasks">
+        <mat-card class="dash-task-view" (mouseover)="taskDetails.style.display = 'block'" (mouseleave)="taskDetails.style.display = 'none'">
+          <mat-card-title class="task-title-container">
+            {{task.taskName}}
+            <mat-icon class="task-todo" (click)="toggleStatus(task)" *ngIf="!task.taskStatus">radio_button_unchecked</mat-icon>
+            <mat-icon class="task-done" (click)=toggleStatus(task) *ngIf="task.taskStatus">task_alt</mat-icon>
+          </mat-card-title>
+          <div class="dash-task-hidden" #taskDetails>
+            <mat-card-content>
+              {{task.taskText}}
+            </mat-card-content>
+            <h3 *ngIf="task.taskStatus; else statusFalse">Status: Done</h3>
+            <ng-template #statusFalse>
+              <h3>Status: To do!</h3>
+            </ng-template>
+            <div >
+              <button mat-raised-button color="accent" (click)="editingTask(task)">Edit</button>
+              <button mat-raised-button color="accent" (click)="deleteTask(task)">Delete</button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+  <ng-template #noTasks>Add Some tasks</ng-template>
+
+</mat-card>

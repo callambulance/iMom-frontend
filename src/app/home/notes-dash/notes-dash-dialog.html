@@ -1,0 +1,19 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>Hi {{data.name}}!</h1>
+  <h2 *ngIf="data.notes.length > 0; else noNotes">These are your notes.</h2>
+  <br>
+  <ng-template #noNotes>Add some notes</ng-template>
+  <div mat-dialog-content>
+    <div *ngFor="let note of data.notes">
+      <mat-card class="single-note">
+        <div class="data">
+          <p>{{note.date}}</p>
+          <h3>{{note.description}}</h3>
+        </div>
+        <button mat-raised-button color="accent" (click)="deleteNote(note)">Delete</button>
+      </mat-card>
+    </div>
+    <br>
+    <h3>Click outside to close</h3>
+  </div>
+</div>

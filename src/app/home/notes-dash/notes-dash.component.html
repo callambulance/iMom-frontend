@@ -1,0 +1,12 @@
+<div class="notes-dash-container">
+  <div class="note-field">
+    <mat-form-field class="notes-input" appearance="outline">
+      <mat-label>What are your thoughts today, {{username}}?</mat-label>
+      <textarea matInput #userNote></textarea>
+    </mat-form-field>
+  </div>
+  <div  class="notes-buttons">
+    <button *ngIf="userNotes" mat-button (click)="openAllNotes()">View All ({{userNotes.length}})</button>
+    <button mat-raised-button color="primary" (click)="saveNote(userNote.value)">Save note</button>
+  </div>
+</div>

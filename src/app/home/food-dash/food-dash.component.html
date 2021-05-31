@@ -1,0 +1,29 @@
+<div class="food-dash-container">
+  <div>
+    <div class="chips-container">
+      <mat-chip-list *ngFor="let day of days">
+        <mat-chip class="chip-after" (focus)="selectDay(day)">{{day}}</mat-chip>
+      </mat-chip-list>
+    </div>
+    <div class="meals-chips-container">
+      <mat-chip-list *ngFor="let meal of meals">
+        <mat-chip class="chip-after" (focus)="selectMeal(meal)">{{meal}}</mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+  <div class="all-meals">
+    <div *ngFor="let food of foodList" class="meals-height">
+      <div *ngIf="food.day.includes(daySelected)" class="meals-height">
+        <div *ngIf="food.mealTime === mealSelected" class="meals-height">
+          <mat-card class="meal-container">
+            <mat-card-title>{{food.recipeName}}</mat-card-title>
+            <mat-card-content>{{food.recipeText}}</mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes-buttons">
+    <button mat-button routerLink="/food">View All</button>
+  </div>
+</div>

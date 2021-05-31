@@ -1,0 +1,40 @@
+<div class="forum-dash-container">
+  <div class="topics-container">
+    <div class="forum-dash-my-topics">
+      <h3>My topics</h3>
+      <div class="div" *ngFor="let question of userQuestions | slice:0:1; let i=index">
+        <mat-card class="forum-dash-card-details">
+          <div>
+            <h3 [routerLink] = "['/forum-question', question.id]">{{question.questionTitle}}</h3>
+          </div>
+          <div class="question-data-crumbs">
+            <p><mat-icon class="material-icons menu-icon">thumb_up_off_alt</mat-icon>{{question.likesQuantity}}</p>
+            <p><mat-icon class="material-icons menu-icon">question_answer</mat-icon>{{question.numberOfAnswers}}</p>
+            <h5>{{question.date}}</h5>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="forum-dash-topics">
+      <h3>Last added questions</h3>
+      <div class="div" *ngFor="let question of lastAddedQuestions | slice:0:3; let i=index">
+        <mat-card class="forum-dash-card-details">
+          <div>
+            <h3 [routerLink] = "['/forum-question', question.id]">{{question.questionTitle}}</h3>
+          </div>
+          <div class="question-data-crumbs">
+            <p><mat-icon class="material-icons menu-icon">thumb_up_off_alt</mat-icon>{{question.likesQuantity}}</p>
+            <p><mat-icon class="material-icons menu-icon">question_answer</mat-icon>{{question.numberOfAnswers}}</p>
+            <h5>{{question.date}}</h5>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="notes-buttons">
+    <button mat-button routerLink="/forum">View All</button>
+  </div>
+</div>
+
+
+<!--*ngFor="let item of list | slice:0:10; let i=index"-->

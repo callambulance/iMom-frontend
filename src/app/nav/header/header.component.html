@@ -1,0 +1,33 @@
+<div class="header-container" [style]="(isHandset$ | async) ? 'flex-direction: column' : 'flex-direction: row'">
+  <div class="search-bar-container">
+    <mat-form-field class="search-input" appearance="outline">
+      <mat-icon matSuffix>search</mat-icon>
+      <mat-label>What are you looking for?</mat-label>
+      <input matInput placeholder="Write here...">
+    </mat-form-field>
+  </div>
+  <div class="user-settings-container">
+    <div id="toggleColorMode">
+        <mat-card-content>
+            <mat-slide-toggle
+              [color]="color"
+              [checked]="checked"
+              [disabled]="disabled">
+              Boy or Girl
+            </mat-slide-toggle>
+        </mat-card-content>
+    </div>
+    <button mat-icon-button>
+      <mat-icon matBadge="7" matBadgeColor="warn">message</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-raised-button color="primary">
+      <div class="user-settings-button">
+        <mat-icon>account_circle</mat-icon>
+        {{username}}
+      </div>
+    </button>
+  </div>
+</div>

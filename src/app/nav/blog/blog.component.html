@@ -1,0 +1,67 @@
+<mat-card class="view-port">
+  <div class="chips-container">
+    <mat-chip-list *ngFor="let chip of categories">
+      <mat-chip style="background-color: #3f51b5; color: white" (focus)="selected(chip)" (focusout)="categorySelected=''">{{chip}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="blog-content-container">
+    <div class="topic-of-the-day-container">
+      <h1>Topic of the Day</h1>
+      <div *ngIf="topic">
+        <mat-card class="blog-post-container">
+          <mat-card-title>{{topic.title}}</mat-card-title>
+          <mat-card-content>{{topic.text}}</mat-card-content><br>
+          <div class="blog-post-footer">
+            <button mat-raised-button color="primary" (click)= "openTopic(topic)">Read more</button>
+            <mat-card-footer>{{topic.date}}</mat-card-footer>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="other-articles-container">
+      <h1>Other</h1>
+      <div>
+        <div *ngIf="categorySelected === ''; else noSelected" class="others-container">
+          <div *ngFor="let post of blogPosts">
+            <mat-card class="blog-post-container">
+              <mat-card-title>{{post.title}}</mat-card-title>
+              <mat-card-content>{{post.text}}</mat-card-content><br>
+              <div class="blog-post-footer">
+                <button mat-raised-button color="primary" (click)= "openTopic(post)">Read more</button>
+                <mat-card-footer>{{post.date}}</mat-card-footer>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+        <ng-template #noSelected>
+          <div class="others-container">
+            <div *ngFor="let post of blogPosts" >
+              <div *ngIf="post.category === categorySelected">
+                <mat-card class="blog-post-container">
+                  <mat-card-title>{{post.title}}</mat-card-title>
+                  <mat-card-content>{{post.text}}</mat-card-content><br>
+                  <div class="blog-post-footer">
+                    <button mat-raised-button color="primary" (click)= "openTopic(post)">Read more</button>
+                    <mat-card-footer>{{post.date}}</mat-card-footer>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="things-to-do-container">
+      <mat-card style="height: fit-content">
+        <h1>Things to do:</h1>
+        <mat-checkbox labelPosition="after" >Przygotuj miejsce w domu</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Kup fotelik samochodowy</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Spakuj torbę do szpitala</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Dowiedz się jak karmić</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Zorganizuj położną</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Sprawdź trasę do szpitala</mat-checkbox>
+        <mat-checkbox labelPosition="after" >Wybierz pieluszki</mat-checkbox>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,34 @@
+<div class="calendar-dash-tasks-container">
+  <p>TASKS</p>
+  <div *ngIf="tasks.length > 0; else noTasks" class="tasks">
+    <div *ngFor="let task of tasks">
+      <mat-card class="dash-task-view" (mouseover)="taskDetails.style.display = 'block'" (mouseleave)="taskDetails.style.display = 'none'">
+        <mat-card-title class="task-title-container">
+          {{task.taskName}}
+          <mat-icon class="task-todo" (click)="toggleStatus(task)" *ngIf="!task.taskStatus">radio_button_unchecked</mat-icon>
+          <mat-icon class="task-done" (click)=toggleStatus(task) *ngIf="task.taskStatus">task_alt</mat-icon>
+        </mat-card-title>
+        <div class="dash-task-hidden" #taskDetails>
+          <mat-card-content>
+            {{task.taskText}}
+          </mat-card-content>
+          <h3 *ngIf="task.taskStatus; else statusFalse">Status: Done</h3>
+          <ng-template #statusFalse>
+            <h3>Status: To do!</h3>
+          </ng-template>
+          <div >
+            <button mat-raised-button color="accent" (click)="editingTask(task)">Edit</button>
+            <button mat-raised-button color="accent" (click)="deleteTask(task)">Delete</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="calendar-dash-buttons">
+    <button mat-button routerLink="/calendar">Go to full Calendar</button>
+    <button mat-raised-button color="primary" class="add_task_button" (click)="addTaskDialog()">ADD TASK</button>
+  </div>
+</div>
+
+<ng-template #noTasks>Add Some tasks</ng-template>

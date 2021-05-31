@@ -1,0 +1,18 @@
+<form class="new-task-form"  (ngSubmit)="submitted()" #userForm="ngForm" [formGroup]="taskForm">
+<!--  <div *ngIf="editTask">-->
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="{{data.editingTask.taskName}}" value="" name="newTask.taskName"  formControlName="taskName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput placeholder="{{data.editingTask.taskText}}" value="" name="newTask.taskText"  formControlName="taskText"></textarea>
+  </mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-checkbox type="checkbox" formControlName="taskStatus">
+      <label>done</label>
+    </mat-checkbox>
+  <button mat-raised-button color="primary" type="submit" mat-dialog-close [disabled]="!userForm.form.valid" >Save</button>
+<!--  </div>-->
+</form>
+

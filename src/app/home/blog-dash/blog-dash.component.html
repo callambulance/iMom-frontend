@@ -1,0 +1,32 @@
+<div class="blog-dash-container">
+  <div class="chips-container">
+    <mat-chip-list *ngFor="let chip of categories">
+      <mat-chip style="background-color: #3f51b5; color: white" (focus)="selected(chip)" (focusout)="categorySelected=''">{{chip}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div *ngIf="categorySelected === ''; else Selected" class="blog-dash-articles">
+    <div *ngFor="let post of blogPosts" >
+      <mat-card class="blog-post-container">
+        <mat-card-title>{{post.title}}</mat-card-title>
+        <mat-card-content>{{post.text}}</mat-card-content><br>
+        <mat-card-footer>{{post.date}}</mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+  <ng-template #Selected>
+    <span class="blog-dash-articles">
+      <div *ngFor="let post of blogPosts" >
+        <div *ngIf="post.category === categorySelected">
+          <mat-card class="blog-post-container">
+            <mat-card-title>{{post.title}}</mat-card-title>
+            <mat-card-content>{{post.text}}</mat-card-content><br>
+            <mat-card-footer>{{post.date}}</mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+    </span>
+  </ng-template>
+  <div class="notes-buttons">
+    <button mat-button routerLink="/blog">View All</button>
+  </div>
+</div>

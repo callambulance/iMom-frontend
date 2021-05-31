@@ -1,0 +1,14 @@
+<mat-card>
+  <form class="example-form"  (ngSubmit)="submitted()" #userForm="ngForm" [formGroup]="questionForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="" value="" name="newQuestion.questionTitle"  formControlName="questionTitle">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Body</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..." name="newQuestion.question"  formControlName="question"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" mat-dialog-close [disabled]="!userForm.form.valid">Save</button>
+  </form>
+</mat-card>

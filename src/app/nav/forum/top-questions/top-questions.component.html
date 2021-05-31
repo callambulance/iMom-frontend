@@ -1,0 +1,39 @@
+<div class="searched-top">
+  <div class="search-bar-container">
+    <mat-form-field class="search-input" appearance="outline">
+      <mat-icon matSuffix (click)="search(searchBox.value)" >search</mat-icon>
+      <mat-label class="mr-2" for="search-box">Search Question</mat-label>
+      <input #searchBox id="search-box" matInput placeholder="Write here...">
+    </mat-form-field>
+  </div>
+  <div *ngIf="searchedQuestions.length<1; else searchingQuestions">
+    <div *ngIf="topQuestions">
+      <h3>Top Questions</h3>
+      <div *ngFor="let question of topQuestions">
+        <mat-card class="question-card">
+          <div class="last-content">
+            <button mat-stroked-button color="primary" [routerLink] = "['/forum-question', question.id]">{{question.questionTitle}}</button>
+            <p><mat-icon class="material-icons menu-icon">thumb_up_off_alt</mat-icon>{{question.likesQuantity}}</p>
+            <p><mat-icon class="material-icons menu-icon">question_answer</mat-icon>{{question.numberOfAnswers}}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <ng-template #searchingQuestions>
+    <div *ngIf="searchedQuestions">
+      <h3>Searched Questions</h3>
+      <div *ngFor="let question of searchedQuestions">
+        <mat-card class="question-card">
+          <div class="last-content">
+            <button mat-stroked-button color="primary" [routerLink] = "['/forum-question', question.id]">{{question.questionTitle}}</button>
+            <p><mat-icon class="material-icons menu-icon">thumb_up_off_alt</mat-icon>{{question.likesQuantity}}</p>
+            <p><mat-icon class="material-icons menu-icon">question_answer</mat-icon>{{question.numberOfAnswers}}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
